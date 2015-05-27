@@ -1,0 +1,18 @@
+{
+    "version":1,"allow_edit":true,"plugins":[],
+	"panes":[{"width":1,"row":{"3":1},"col":{"3":1},"col_width":1,
+			"widgets":[{"type":"message_broker_statistic_widget",
+			"settings":{"value":"datasources[\"STAT\"]"}}]},
+		{"width":1,"row":{"3":1},"col":{"3":2},"col_width":1,
+			"widgets":[{"type":"message_broker_sub_widget",
+			"settings":{"size":"large","value":"datasources[\"ALL\"]"}}]},
+		{"width":1,"row":{"3":1},"col":{"3":3},"col_width":1,
+			"widgets":[{"type":"message_broker_topic_widget",
+			"settings":{"size":"large","value":"datasources[\"TOPICS\"]"}}]}],
+	"datasources":[{"name":"STAT","type":"message_broker_plugin",
+				"settings":{"topic_name":"STATISTIC","sub_type":"topic"}},
+			{"name":"ALL","type":"message_broker_plugin",
+				"settings":{"topic_name":"ALL","sub_type":"topic"}},
+			{"name":"TOPICS","type":"message_broker_plugin",
+				"settings":{"topic_name":"TOPICS","sub_type":"topic"}}],
+"columns":3}
