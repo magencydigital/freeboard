@@ -4,7 +4,7 @@
     var subs = [];
 
     function openConnection() {
-        ws = new WebSocket("ws://"+mbHost+":"+mbPort);
+        ws = new WebSocket("ws://"+MB_HOST+":"+MB_PORT);
  
         ws.onopen = function(evt) {
             console.log("ws : connected");

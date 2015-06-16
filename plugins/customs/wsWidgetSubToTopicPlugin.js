@@ -63,33 +63,34 @@
         this.onCalculatedValueChanged = function(settingName, newValue){
             if(settingName == "value"){
                 var html, i;
-                var ar = newValue.split(":");
-                
-                if (ar.length > 1) {
-                    var result = "";
-                    if (ar.length == 2){
-                        result = ar[1];
-                    }
-                    else{
-                        result = topicParser(ar[1])+": "+ar[2];
-                    }
-                    
-                    var topic = ar[0].fontcolor("#ff2222");
-
-                    myListElements[myListElements.length] = result;
-                    var size = myListElements.length+"";
-                   
-                    $(myTitle).html("Messages received from "+topic+": "+size.fontcolor("#ff2222"));
-
-                    html = "";
-                    for(i=0; i< myListElements.length; i++) {
-                        html += "<tr><td>"+idParser(i+1)+"</td><td>"+myListElements[i]+"</td></tr>";
-                    }
-
-
-                    $(myList).html("<table>"+html+"</table>");
-                    $(myList).scrollTop($(myList)[0].scrollHeight);
+                var tab = newValue.split(ITEM_SEPARATOR, 1);
+                if(tab.length < 1){
+                    return 1;
                 }
+                var topic = tab[0];
+                var rest = newValue.substring(topic.length + ITEM_SEPARATOR.length);
+                if (topic == TOPICS_NAME_ALL){
+                    tab = rest.split(ITEM_SEPARATOR, 1);
+                    subTopic = tab[0];
+                    message = rest.substring(subTopic.length + ITEM_SEPARATOR.length);
+                    line = topicParser(subTopic)+": "+message;
+                }
+                else{
+                    line = rest;
+                } 
+
+                myListElements[myListElements.length] = line;
+                var size = myListElements.length+"";
+                topic = topic.fontcolor("#ff2222");
+                $(myTitle).html("Messages received from "+topic+": "+size.fontcolor("#ff2222"));
+
+                html = "";
+                for(i=0; i< myListElements.length; i++) {
+                    html += "<tr><td>"+idParser(i+1)+"</td><td>"+myListElements[i]+"</td></tr>";
+                }
+                    
+                $(myList).html("<table>"+html+"</table>");
+                $(myList).scrollTop($(myList)[0].scrollHeight);
             
             }
         }
